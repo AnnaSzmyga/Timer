@@ -1,7 +1,9 @@
 class Stopwatch {
-    constructor(display) {
+    constructor(display, results) {
         this.running = false;
         this.display = display;
+        this.results = results;
+        this.timesList = [];
         this.reset();
         this.print(this.times);
     }
@@ -49,13 +51,15 @@ class Stopwatch {
         this.reset();
         this.print();
     }
-    saveResult(list) {
+    saveResult() {
+        this.timesList.push(this.format(this.times));
         let result = document.createElement('li');
-        result.innerText = this.format(this.times);
-        list.appendChild(result);
+        result.innerText = this.timesList[this.timesList.length - 1];
+        this.results.appendChild(result);
     }
-    deleteResults(list) {
-        list.innerHTML = '';
+    deleteResults() {
+        this.timesList = [];
+        this.results.innerHTML = '';
     }
 }
 
@@ -67,7 +71,9 @@ function pad0(value) {
     return result;
 }
 
-const stopwatch = new Stopwatch(document.querySelector('.stopwatch'));
+let stopwatchElement = document.querySelector('.stopwatch');
+let resultsList = document.querySelector('.results');
+const stopwatch = new Stopwatch(stopwatchElement, resultsList);
 
 let startButton = document.getElementById('start');
 startButton.addEventListener('click', () => stopwatch.start());
@@ -79,8 +85,7 @@ let resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => stopwatch.clear());
 
 let saveResultButton = document.getElementById('save-result');
-let resultsList = document.querySelector('.results');
-saveResultButton.addEventListener('click', () => stopwatch.saveResult(resultsList));
+saveResultButton.addEventListener('click', () => stopwatch.saveResult());
 
 let deleteButton = document.getElementById('delete');
-deleteButton.addEventListener('click', () => stopwatch.deleteResults(resultsList));
+deleteButton.addEventListener('click', () => stopwatch.deleteResults());
