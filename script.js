@@ -107,15 +107,14 @@ class Results extends React.Component {
         });
     }
     render() {
-        let results = this.state.timesList.map(result => { return <li>{result}</li>});
-        console.log(this.state.timesList);
+        let results = this.state.timesList.map(result => <li>{result}</li>);
         return (
-                <div>
-                    <button className="button" id="save-result" onClick={this.saveResult}>Save result</button>
-                    <button className="button" id="delete" onClick={this.deleteResults}>Delete</button>
-                    <ul className="results">{results}</ul>
-                </div>
-            )
+            <div>
+                <button className="button" id="save-result" onClick={this.saveResult}>Save result</button>
+                <button className="button" id="delete" onClick={this.deleteResults}>Delete</button>
+                <ul className="results">{results}</ul>
+            </div>
+        )
     }
 };
 

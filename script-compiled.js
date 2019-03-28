@@ -197,7 +197,6 @@ function (_React$Component2) {
       var results = this.state.timesList.map(function (result) {
         return React.createElement("li", null, result);
       });
-      console.log(this.state.timesList);
       return React.createElement("div", null, React.createElement("button", {
         className: "button",
         id: "save-result",
